@@ -58,7 +58,7 @@
                                 <div class="intro_date">{{ $package->start_date }} - {{ $package->end_date }}</div>
                                 <div class="button intro_button">
                                     <div class="button_bcg"></div>
-                                    <a href="packages.html">see more<span></span><span></span><span></span></a></div>
+                                    <a href="{{ $package->id }}">see details<span></span><span></span><span></span></a></div>
                                 <div class="intro_center text-center">
                                     <h1>{{ $package->package_name }}</h1>
                                     <div class="intro_price">From Taka {{ $package->tour_price }}</div>

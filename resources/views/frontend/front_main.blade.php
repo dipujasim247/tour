@@ -116,6 +116,11 @@
     {{-- ============================================= Packages grid end ======================================================= --}}
 
     {{--    !======================================= Footer section ==========================================================--}}
+{{--    <div class="row">--}}
+{{--        <div class="col-12">--}}
+{{--            <img src="{{ asset('frontend/images/home_slider.jpg') }}" alt="">--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <footer class="footer">
         <div class="container">
@@ -125,7 +130,7 @@
                     <div class="footer_col">
                         <div class="footer_content footer_about">
                             <div class="logo_container footer_logo">
-                                <div class="logo"><a href="#"><img src="images/logo.png" alt="">travelix</a></div>
+                                <div class="logo"><a href="#"><img src="{!! asset('frontend/images/logo.png') !!}}" alt="">travel</a></div>
                             </div>
                             <p class="footer_about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 Vivamus quis vu lputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer
@@ -269,18 +274,16 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('frontend/js/jquery-3.2.1.min.js') }}" type="60c65d6afb0d070361dd9016-text/javascript"></script>
+<script src="{{ asset('frontend/js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('frontend/styles/bootstrap4/popper.js') }}"
-        type="60c65d6afb0d070361dd9016-text/javascript"></script>
+        type="text/javascript"></script>
 <script src="{{ asset('frontend/styles/bootstrap4/bootstrap.min.js') }}"
-        type="60c65d6afb0d070361dd9016-text/javascript"></script>
+        type="text/javascript"></script>
 <script src="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"
-        type="60c65d6afb0d070361dd9016-text/javascript"></script>
-<script src="{{ asset('frontend/plugins/easing/easing.js') }}" type="60c65d6afb0d070361dd9016-text/javascript"></script>
-<script src="{{ asset('frontend/js/custom.js') }}" type="60c65d6afb0d070361dd9016-text/javascript"></script>
+        type="text/javascript"></script>
+<script src="{{ asset('frontend/plugins/easing/easing.js') }}" type="text/javascript"></script>
+<script src="{{ asset('frontend/js/custom.js') }}" type="text/javascript"></script>
 <script src="../../../../ajax.cloudflare.com/cdn-cgi/scripts/95c75768/cloudflare-static/rocket-loader.min.js"
-        data-cf-settings="60c65d6afb0d070361dd9016-|49" defer=""></script>
+        data-cf-settings="49" defer=""></script>
 </body>
-
-<!-- Mirrored from colorlib.com/preview/theme/travelix/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 17 Nov 2019 06:03:44 GMT -->
 </html>

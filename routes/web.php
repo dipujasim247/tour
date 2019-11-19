@@ -12,10 +12,11 @@
 */
 // == Home page ==
 Route::get('/', 'frontend\FrontContinentController@index');
-Route::get('/{id}', 'frontend\FrontPackageController@getPackagesFromContinent');
 
-// == Package Page
+// == Package Page ==
 Route::get('/packages', 'frontend\FrontPackageController@index');
+Route::get('/packages/{id}', 'frontend\FrontPackageController@getPackagesFromContinent')->name('package.show_package');
+Route::get('/packages/details/{id}', 'frontend\FrontPackageController@getPackagesFromContinent')->name('package.show_package_details');
 
 Auth::routes();
 
