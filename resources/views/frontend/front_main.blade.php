@@ -61,14 +61,14 @@
             <div class="row">
                 <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
                     <div class="logo_container">
-                        <div class="logo"><a href="#"><img src="{{ asset('frontend/images/logo.png') }}" alt=""> travel</a></div>
+                        <div class="logo"><a href="#"><img src="{{ asset('frontend/images/sylhet.png') }}" alt=""></a></div>
                     </div>
                     <div class="main_nav_container ml-auto">
                         <ul class="main_nav_list">
-                            <li class="main_nav_item"><a href="#">home</a></li>
-                            <li class="main_nav_item"><a href="about.html">about us</a></li>
-                            <li class="main_nav_item"><a href="offers.html">offers</a></li>
-                            <li class="main_nav_item"><a href="blog.html">news</a></li>
+                            <li class="main_nav_item"><a href="{{ route('front.index') }}">home</a></li>
+                            <li class="main_nav_item"><a href="{{ route('front.continent') }}">Destinations</a></li>
+                            <li class="main_nav_item"><a href="offers.html">Air Ticket</a></li>
+                            <li class="main_nav_item"><a href="blog.html">About Us</a></li>
                             <li class="main_nav_item"><a href="contact.html">contact</a></li>
                         </ul>
                     </div>
@@ -130,7 +130,7 @@
                     <div class="footer_col">
                         <div class="footer_content footer_about">
                             <div class="logo_container footer_logo">
-                                <div class="logo"><a href="#"><img src="{!! asset('frontend/images/logo.png') !!}}" alt="">travel</a></div>
+                                <div class="logo"><a href="#"><img src="{!! asset('frontend/images/sylhet.png') !!}}" alt=""></a></div>
                             </div>
                             <p class="footer_about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 Vivamus quis vu lputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer

@@ -21,8 +21,8 @@ class ContinentController extends Controller
      */
     public function index()
     {
-        $continent = Continent::paginate(20);
-        return view('backend.continent.index')->with(compact('continent', $continent));
+        $continents = Continent::paginate(20);
+        return view('backend.continent.index')->with(compact('continents', $continents));
     }
 
     /**
@@ -71,7 +71,7 @@ class ContinentController extends Controller
             $request->session()->flash('success','Continent Created Successfully');
             return redirect()->route('backend.continent.index');
         }else{
-            $request->session()->flash('success','Continent Create Fail');
+            $request->session()->flash('error','Continent Create Fail');
             return redirect()->route('backend.continent.add');
         }
 
