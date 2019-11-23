@@ -17,7 +17,7 @@ class CreateSubContinentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('sub_continent_name');
             $table->unsignedBigInteger('continent_name')->nullable();
-            $table->string('description');
+            $table->text('description');
             $table->string('photo');
             $table->timestamps();
             $table->foreign('continent_name')->references('id')->on('continent');

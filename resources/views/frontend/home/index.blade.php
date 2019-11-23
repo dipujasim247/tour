@@ -230,7 +230,7 @@
                     <h4><b>tours in monaco</b></h4>
                     <div class="tour-info-line clearfix">
                         <div class="tour-info fl">
-                            <img src="{{ asset('images/Beijing-Kunming-China-Tour-Package.jpg') }}" alt="">
+                            <img src="{{ asset('frontend/img/calendar_icon_grey.png') }}" alt="">
                             <span class="font-style-2 color-grey-3">July <strong>19th 2015</strong></span>
                         </div>
                         <div class="tour-info fl">

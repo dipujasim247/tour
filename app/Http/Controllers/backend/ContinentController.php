@@ -25,7 +25,7 @@ class ContinentController extends Controller
      */
     public function index()
     {
-        $continents = Continent::paginate(20);
+        $continents = Continent::paginate(10);
         return view('backend.continent.index')->with(compact('continents', $continents));
     }
 

@@ -22,8 +22,8 @@ class SubContinentController extends Controller
      */
     public function index()
     {
-        $subContinent = SubContinent::paginate(20);
-        return view('backend.subcontinent.index')->with(compact('subContinent', $subContinent));
+        $subContinents = SubContinent::paginate(10);
+        return view('backend.subcontinent.index')->with(compact('subContinents'));
     }
 
     /**
@@ -33,8 +33,8 @@ class SubContinentController extends Controller
      */
     public function create()
     {
-        $continent = Continent::all();
-        return view('backend.subcontinent.add')->with(compact('continent', $continent));
+        $continents = Continent::select('id', 'continent_name')->get();
+        return view('backend.subcontinent.add')->with(compact('continents'));
     }
 
     /**
@@ -50,32 +50,36 @@ class SubContinentController extends Controller
             'sub_continent_name' => 'required',
             'continent_name' => 'required',
             'description' => 'nullable',
-            'photo' => 'required|images|mimes:jpeg,png,jpg,gif,svg',
+            'photo' => 'required',
         ]);
 
+        dd($data);
+
         // == take photo name and extention ==
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
+//        if ($request->hasFile('photo')) {
+//            $photo = $request->file('photo');
             $name = Str::slug($request->input('first_name')) . '_' . time();
-            $folder = "/images/";
-            $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
-            $this->uploadImg($photo, $folder, 'public', $name);
-        }
+//            $folder = "/images/";
+//            $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
+//            $this->uploadImg($photo, $folder, 'public', $name);
+//        }
+
+        $photoPath = $request->file('photo')->storeAs('/public/image_gallery/', $name);
 
         // == store Continent ==
         $result = SubContinent::create([
             'sub_continent_name' => $request->sub_continent_name,
             'continent_name' => $request->continent_name,
             'description' => $request->description,
-            'photo' => $filePath,
+            'photo' => $photoPath,
         ]);
 
         if ($result){
             $request->session()->flash('success','Sub Continent Created Successfully');
-            return redirect()->route('backend.subcontinent.index');
+            return redirect()->route('subcontinent.add');
         }else{
             $request->session()->flash('success','Sub Continent Create Fail');
-            return redirect()->route('backend.subcontinent.add');
+            return redirect()->route('subcontinent.add');
         }
     }
 
@@ -100,7 +104,8 @@ class SubContinentController extends Controller
     public function edit($id)
     {
         // == Edit SubContinent ==
-        $continenShow = SubContinent::findOrFail($id);
+        $subContinenEdit = SubContinent::findOrFail($id);
+        return view('backend.subcontinent.edit')->with(compact('subContinenEdit'));
     }
 
     /**
@@ -120,27 +125,29 @@ class SubContinentController extends Controller
             'photo' => 'required|images|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
+//        if ($request->hasFile('photo')) {
+//            $photo = $request->file('photo');
             $name = Str::slug($request->input('first_name')) . '_' . time();
-            $folder = "/images/";
-            $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
-            $this->uploadImg($photo, $folder, 'public', $name);
-        }
+//            $folder = "/images/";
+//            $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
+//            $this->uploadImg($photo, $folder, 'public', $name);
+//        }
+
+        $photoPath = $request->file('photo')->storeAs('/public/image_gallery/', $name);
         // == Update Continent ==
         $result = SubContinent::findOrFail($id)->update([
             'sub_continent_name' => $request->sub_continent_name,
             'continent_name' => $request->continent_name,
             'description' => $request->description,
-            'photo' => $filePath,
+            'photo' => $photoPath,
         ]);
 
         if ($result){
             $request->session()->flash('success','Sub Continent Updated Successfully');
-            return redirect()->route('backend.subcontinent.index');
+            return redirect()->route('subcontinent.index');
         }else{
             $request->session()->flash('success','Sub Continent Create Fail');
-            return redirect()->route('backend.subcontinent.edit');
+            return redirect()->route('subcontinent.edit');
         }
     }
 
@@ -156,10 +163,10 @@ class SubContinentController extends Controller
         $result = SubContinent::findOrFail($id)->delete();
         if ($result){
             session()->flash('success','Sub Continent Updated Successfully');
-            return redirect()->route('backend.subcontinent.index');
+            return redirect()->route('subcontinent.index');
         }else{
             session()->flash('success','Sub Continent Create Fail');
-            return redirect()->route('backend.subcontinent.edit');
+            return redirect()->route('subcontinent.edit');
         }
     }
 }
