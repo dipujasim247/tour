@@ -405,6 +405,7 @@ class ComposerStaticInit9db8dcc22104c80975713da207016fab
     );
 
     public static $classMap = array (
+        'App\\BookingModel' => __DIR__ . '/../..' . '/app/BookingModel.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Continent' => __DIR__ . '/../..' . '/app/Continent.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -416,6 +417,7 @@ class ComposerStaticInit9db8dcc22104c80975713da207016fab
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\backend\\BookingController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/BookingController.php',
         'App\\Http\\Controllers\\backend\\ContinentController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/ContinentController.php',
         'App\\Http\\Controllers\\backend\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/DashboardController.php',
         'App\\Http\\Controllers\\backend\\PackageController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/PackageController.php',

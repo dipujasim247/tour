@@ -16,11 +16,12 @@
     <link rel="canonical" href="https://www.wrappixel.com/templates/adminpro/"/>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('backend/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/assets/plugins/perfect-scrollbar/dist/css/perfect-scrollbar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/perfect-scrollbar/dist/css/perfect-scrollbar.min.css') }}"
+          rel="stylesheet">
     <!-- This page CSS -->
     <!-- Editable CSS -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('backend/assets/plugins/jsgrid/jsgrid.min.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset('backend/assets/plugins/jsgrid/jsgrid-theme.min.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('backend/assets/plugins/jsgrid/jsgrid.min.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('backend/assets/plugins/jsgrid/jsgrid-theme.min.css') }}"/>
     <!-- chartist CSS -->
     <link href="{{ asset('backend/assets/plugins/chartist-js/dist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}"
@@ -37,6 +38,7 @@
     <link href="{{ asset('backend/css/colors/default-dark.css') }}" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -66,16 +68,19 @@
                     <!-- Logo icon --><b>
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
-                        <img src="{{ asset('backend/assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo"/>
+                        <img src="{{ asset('images/sylhet.png') }}" alt="homepage" class="dark-logo"/>
                         <!-- Light Logo icon -->
-                        <img src="{{ asset('backend/assets/images/logo-light-icon.png') }}" alt="homepage" class="light-logo"/>
+                        <img src="{{ asset('backend/assets/images/logo-light-icon.png') }}" alt="homepage"
+                             class="light-logo"/>
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="{{ asset('backend/assets/images/logo-text.png') }}" alt="homepage" class="dark-logo"/>
+                         <img src="{{ asset('backend/assets/images/logo-text.png') }}" alt="homepage"
+                              class="dark-logo"/>
                         <!-- Light Logo text -->
-                         <img src="{{ asset('backend/assets/images/logo-light-text.png') }}" class="light-logo" alt="homepage"/></span> </a>
+                         <img src="{{ asset('backend/assets/images/logo-light-text.png') }}" class="light-logo"
+                              alt="homepage"/></span> </a>
             </div>
             <!-- ============================================================== -->
             <!-- End Logo -->
@@ -178,7 +183,16 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-power-off"></i> Logout
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -249,9 +263,9 @@
     <!-- ============================================================== -->
     <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 
-    @yield('content')
+@yield('content')
 
-    <!-- ============================================================== -->
+<!-- ============================================================== -->
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->

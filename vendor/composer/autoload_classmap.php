@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\BookingModel' => $baseDir . '/app/BookingModel.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Continent' => $baseDir . '/app/Continent.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -17,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
+    'App\\Http\\Controllers\\backend\\BookingController' => $baseDir . '/app/Http/Controllers/backend/BookingController.php',
     'App\\Http\\Controllers\\backend\\ContinentController' => $baseDir . '/app/Http/Controllers/backend/ContinentController.php',
     'App\\Http\\Controllers\\backend\\DashboardController' => $baseDir . '/app/Http/Controllers/backend/DashboardController.php',
     'App\\Http\\Controllers\\backend\\PackageController' => $baseDir . '/app/Http/Controllers/backend/PackageController.php',

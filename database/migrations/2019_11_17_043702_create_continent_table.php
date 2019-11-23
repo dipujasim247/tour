@@ -17,8 +17,8 @@ class CreateContinentTable extends Migration
             $table->bigIncrements('id');
             $table->string('continent_name');
             $table->decimal('starting_price');
-            $table->string('description')->nullable();
-            $table->string('photo')->nullable();
+            $table->text('description');
+            $table->string('photo');
             $table->timestamps();
         });
     }

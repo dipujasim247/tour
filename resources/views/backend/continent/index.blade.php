@@ -60,6 +60,7 @@
                                     <th>Id</a></th>
                                     <th>Image</th>
                                     <th>Country name</th>
+                                    <th>Starting Price</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -68,10 +69,22 @@
                                 @foreach($continents as $continent)
                                     <tr id="1" class="gradeX">
                                         <td>{{ $continent->id }}</td>
-                                        <td>{{ $continent->photo }}</td>
+                                        <td><img class="img-thumbnail" src="{{ asset('$continent->photo') }}" alt=""></td>
                                         <td>{{ $continent->continent_name }}</td>
-                                        <td>{{ $continent->description }}</td>
-                                        <td></td>
+                                        <td>{{ $continent->starting_price }}</td>
+                                        <td class="w-50">{{ $continent->description }}</td>
+                                        <td>
+                                            <a type="button" href="{{ route('continent.edit', $continent->id) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>
+
+                                            </a>
+                                            <form action="{{ route('continent.delete', $continent->id) }}" method="post" onsubmit="return confirm('Are You Sure?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
+
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -80,6 +93,7 @@
                                     <th>Id</th>
                                     <th>Image</th>
                                     <th>Country name</th>
+                                    <th>Starting Price</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -93,49 +107,7 @@
             <!-- End PAge Content -->
             <!-- ============================================================== -->
 
-            <!-- ============================================================== -->
-            <!-- Start Page Content -->
-            <!-- ============================================================== -->
-            <div class="row">
-                <div class="col-12">
-                    <!-- Column -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Editable with Datatable</h4>
-                            <div id="basicgrid"></div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Static</h4>
-                            <div id="staticgrid"></div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Soarting</h4>
-                            <div class="col-md-2 row">
-                                <select id="sortingField" class="custom-select form-control input-sm m-b-10">
-                                    <option>Name</option>
-                                    <option>Age</option>
-                                    <option>Address</option>
-                                    <option>Country</option>
-                                    <option>Married</option>
-                                </select>
-                            </div>
-                            <div id="exampleSorting"></div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End PAge Content -->
-            <!-- ============================================================== -->
+
 
 
 @endsection
