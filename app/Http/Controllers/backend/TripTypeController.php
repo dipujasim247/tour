@@ -22,8 +22,8 @@ class TripTypeController extends Controller
      */
     public function index()
     {
-        $tripType = TripType::paginate(20);
-        return view('backend.trip_type.index')->with(compact('tripType', $tripType));
+        $tripTypes = TripType::paginate(10);
+        return view('backend.trip_type.index')->with(compact('tripTypes'));
     }
 
     /**
@@ -54,10 +54,10 @@ class TripTypeController extends Controller
 
         if ($result){
             $request->session()->flash('success','Trip type Created Successfully');
-            return redirect()->route('backend.trip_type.index');
+            return redirect()->route('trip_type.add');
         }else{
-            $request->session()->flash('success','Trip type Create Fail');
-            return redirect()->route('backend.trip_type.add');
+            $request->session()->flash('error','Trip type Create Fail');
+            return redirect()->route('trip_type.add');
         }
     }
 
@@ -80,7 +80,8 @@ class TripTypeController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.trip_type.edit');
+        $tripType = TripType::findOrFail($id);
+        return view('backend.trip_type.edit', compact('tripType'));
     }
 
     /**
@@ -101,11 +102,11 @@ class TripTypeController extends Controller
         $result = TripType::findOrFail($id)->update($data);
 
         if ($result){
-            $request->session()->flash('success','Trip type Created Successfully');
-            return redirect()->route('backend.trip_type.index');
+            $request->session()->flash('success','Trip type Updated Successfully');
+            return redirect()->route('trip_type.edit');
         }else{
-            $request->session()->flash('success','Trip type Create Fail');
-            return redirect()->route('backend.trip_type.edit');
+            $request->session()->flash('error','Trip type Update Fail');
+            return redirect()->route('trip_type.edit');
         }
     }
 
@@ -119,11 +120,11 @@ class TripTypeController extends Controller
     {
         $result = TripType::findOrFail($id)->delete();
         if ($result){
-            session()->flash('success','Trip type Created Successfully');
-            return redirect()->route('backend.trip_type.index');
+            session()->flash('success','Trip type Deleted Successfully');
+            return redirect()->route('trip_type.index');
         }else{
-            session()->flash('success','Trip type Create Fail');
-            return redirect()->route('backend.trip_type.edit');
+            session()->flash('error','Trip type Delete Fail');
+            return redirect()->route('trip_type.index');
         }
     }
 }

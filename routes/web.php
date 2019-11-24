@@ -34,12 +34,22 @@ Route::get('/continent/edit/{id}', 'backend\ContinentController@edit')->name('co
 Route::put('/continent/update/{id}', 'backend\ContinentController@update')->name('continent.update');
 Route::delete('/continent/delete/{id}', 'backend\ContinentController@destroy')->name('continent.delete');
 
-// ==Admin Continent Route ==
+// ==Admin Sub Continent Route ==
 Route::get('/subcontinent/list', 'backend\SubContinentController@index')->name('subcontinent.index');
 Route::get('/subcontinent/add', 'backend\SubContinentController@create')->name('subcontinent.add');
 Route::post('/subcontinent/store', 'backend\SubContinentController@store')->name('subcontinent.store');
 Route::get('/subcontinent/edit/{id}', 'backend\SubContinentController@edit')->name('subcontinent.edit');
 Route::put('/subcontinent/update/{id}', 'backend\SubContinentController@update')->name('subcontinent.update');
 Route::delete('/subcontinent/delete/{id}', 'backend\SubContinentController@destroy')->name('subcontinent.delete');
+
+// ==Admin Trip Type Route ==
+Route::get('/trip-type/list', 'backend\TripTypeController@index')->name('trip_type.index');
+Route::get('/trip-type/add', 'backend\TripTypeController@create')->name('trip_type.add');
+Route::post('/trip-type/store', 'backend\TripTypeController@store')->name('trip_type.store');
+Route::get('/trip-type/edit/{id}', 'backend\TripTypeController@edit')->name('trip_type.edit');
+Route::put('/trip-type/update/{id}', 'backend\TripTypeController@update')->name('trip_type.update');
+Route::delete('/trip-type/delete/{id}', 'backend\TripTypeController@destroy')->name('trip_type.delete');
+
+
 
 

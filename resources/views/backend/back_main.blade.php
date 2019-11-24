@@ -247,6 +247,15 @@
                     </li>
 
                     <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                class="fas fa-calendar-plus"></i><span class="hide-menu">Trip Type</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{ route('trip_type.add') }}">Create</a></li>
+                            <li><a href="{{ route('trip_type.index') }}">List</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="fas fa-box"></i><span class="hide-menu">Package </span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="package.html">Create</a></li>

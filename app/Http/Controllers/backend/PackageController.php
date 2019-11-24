@@ -8,6 +8,7 @@ use App\Package;
 use App\SubContinent;
 use App\TripType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PackageController extends Controller
 {
@@ -18,8 +19,8 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $package = Package::paginate(20);
-        return view('backend.subcontinent.index')->with(compact('package', $package));
+        $packages = Package::paginate(10);
+        return view('backend.subcontinent.index')->with(compact('packages'));
     }
 
     /**
@@ -30,9 +31,9 @@ class PackageController extends Controller
 
     public function create()
     {
-        $continent = Continent::all();
-        $subContinent = SubContinent::all();
-        $tripType = TripType::all();
+        $continent = Continent::select('id', 'continent_name')->get();
+        $subContinent = SubContinent::select('id', 'sub_continent_name')->get();
+        $tripType = TripType::select('id', 'trip_type')->get();
         return view('backend.subcontinent.add')
             ->with(compact('continent', $continent))
             ->with(compact('subContinent', $subContinent))

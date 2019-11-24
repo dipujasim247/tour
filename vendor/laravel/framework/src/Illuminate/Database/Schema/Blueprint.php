@@ -813,7 +813,7 @@ class Blueprint
      * @param  int  $places
      * @return \Illuminate\Database\Schema\ColumnDefinition
      */
-    public function decimal($column, $total = 12, $places = 2)
+    public function decimal($column, $total = 8, $places = 2)
     {
         return $this->addColumn('decimal', $column, compact('total', 'places'));
     }

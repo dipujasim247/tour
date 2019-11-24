@@ -57,7 +57,7 @@
                             <table class="table table-striped table-bordered" id="editable-datatable">
                                 <thead>
                                 <tr>
-                                    <th>Id</a></th>
+                                    <th>Id</th>
                                     <th>Image</th>
                                     <th>Country name</th>
                                     <th>Starting Price</th>

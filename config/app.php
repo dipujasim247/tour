@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'base64:Tt/JDjEl4vw2GEa4zx7wTd+hShhSnOfo3FM3xMtE/aY='),
 
     'cipher' => 'AES-256-CBC',
 
@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         /*
          * Application Service Providers...
          */
