@@ -6,12 +6,19 @@ use App\Continent;
 use App\Http\Controllers\Controller;
 use App\Package;
 use App\SubContinent;
+use App\Traits\ImageUploadTrait;
 use App\TripType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class PackageController extends Controller
 {
+    use ImageUploadTrait;
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +27,7 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::paginate(10);
-        return view('backend.subcontinent.index')->with(compact('packages'));
+        return view('backend.package.index')->with(compact('packages'));
     }
 
     /**
@@ -31,13 +38,13 @@ class PackageController extends Controller
 
     public function create()
     {
-        $continent = Continent::select('id', 'continent_name')->get();
-        $subContinent = SubContinent::select('id', 'sub_continent_name')->get();
-        $tripType = TripType::select('id', 'trip_type')->get();
-        return view('backend.subcontinent.add')
-            ->with(compact('continent', $continent))
-            ->with(compact('subContinent', $subContinent))
-            ->with(compact('tripType', $tripType));
+        $continents = Continent::select('id', 'continent_name')->get();
+        $subContinents = SubContinent::select('id', 'sub_continent_name')->get();
+        $tripTypes = TripType::select('id', 'trip_type')->get();
+        return view('backend.package.add')
+            ->with(compact('continents'))
+            ->with(compact('subContinents'))
+            ->with(compact('tripTypes'));
     }
 
     /**
@@ -54,21 +61,21 @@ class PackageController extends Controller
             'sub_continents_id' => 'required',
             'trip_type_id' => 'required',
             'tour_duration' => 'required',
-            'start_time' => 'nullable|date',
-            'end_time' => 'nullable|date',
-            'tour_price' => 'required|number',
+            'start_time' => 'date',
+            'end_time' => 'date',
+            'tour_price' => 'required|numeric',
             'tour_details' => 'required',
             'tour_price_include' => 'nullable',
             'tour_price_exclude' => 'nullable',
             'hotels' => 'required',
-            'photo' => 'required|images|mimes:jpeg,png,jpg,gif,svg',
+            'photo' => 'required',
         ]);
 
         // == take photo name and extention ==
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $name = Str::slug($request->input('first_name')) . '_' . time();
-            $folder = "/images/";
+            $folder = "/image_gallery";
             $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
             $this->uploadImg($photo, $folder, 'public', $name);
         }
@@ -91,10 +98,10 @@ class PackageController extends Controller
         // == sessions ==
         if ($result){
             $request->session()->flash('success','Package Created Successfully');
-            return redirect()->route('backend.package.index');
+            return redirect()->route('package.add');
         }else{
             $request->session()->flash('success','Package Create Fail');
-            return redirect()->route('backend.package.add');
+            return redirect()->route('package.add');
         }
     }
 
@@ -107,6 +114,7 @@ class PackageController extends Controller
     public function show($id)
     {
         $showPackage = Package::findOrFail($id);
+        return view('backend.package.show', compact('showPackage'));
     }
 
     /**
@@ -117,15 +125,22 @@ class PackageController extends Controller
      */
     public function edit($id)
     {
-        $packageEdit = Package::all()->findOrFail($id);
-        $continent = Continent::all();
-        $subContinent = SubContinent::all();
-        $tripType = TripType::all();
-        return view('backend.subcontinent.add')
-            ->with(compact('packageEdit', $packageEdit))
-            ->with(compact('continent', $continent))
-            ->with(compact('subContinent', $subContinent))
-            ->with(compact('tripType', $tripType));
+        $packageEdit = Package::findOrFail($id);
+
+        $continents = Continent::select('id', 'continent_name')->get();
+        //$selectContinent = Continent::select('id', 'continent_name')->where('id', $id);
+        $subContinents = SubContinent::select('id', 'sub_continent_name')->get();
+        //$selectSubContinent = SubContinent::select('id', 'sub_continent_name')->where('id', $id);
+        $tripTypes = TripType::select('id', 'trip_type')->get();
+        //$selectTripTypeContinent = TripType::select('id', 'trip_type')->where('id', $id);
+        return view('backend.package.edit')
+            ->with(compact('packageEdit'))
+            ->with(compact('continents'))
+            ->with(compact('subContinents'))
+            ->with(compact('tripTypes'));
+//            ->with(compact('selectContinent'))
+//            ->with(compact('selectSubContinent'))
+//            ->with(compact('selectTripTypeContinent'));
     }
 
     /**
@@ -137,51 +152,59 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
             'package_name' => 'required',
-            'continents_id' => 'required',
-            'sub_continents_id' => 'required',
-            'trip_type_id' => 'required',
+            'continents_id' => 'required|numeric',
+            'sub_continents_id' => 'required|numeric',
+            'trip_type_id' => 'required|numeric',
             'tour_duration' => 'required',
-            'tour_price' => 'required|number',
+            'tour_price' => 'required|numeric',
             'tour_details' => 'required',
-            'tour_price_include' => 'nullable',
-            'tour_price_exclude' => 'nullable',
+            'tour_price_include' => '',
+            'tour_price_exclude' => '',
             'hotels' => 'required',
-            'photo' => 'required|images|mimes:jpeg,png,jpg,gif,svg',
+            'photo' => 'required',
         ]);
 
         // == take photo name and extention ==
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $name = Str::slug($request->input('first_name')) . '_' . time();
-            $folder = "/images/";
+            $folder = "/image_gallery/";
             $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
             $this->uploadImg($photo, $folder, 'public', $name);
         }
 
         // == store data from package ==
-        $result = Package::findOrFail($id)->update([
-            'package_name' => $request->package_name,
-            'continents_id' =>  $request->continents_id,
-            'sub_continents_id' =>  $request->sub_continents_id,
-            'trip_type_id' =>  $request->trip_type_id,
-            'tour_duration' =>  $request->tour_duration,
-            'tour_price' =>  $request->tour_price,
-            'tour_details' =>  $request->tour_details,
-            'tour_price_include' =>  $request->tour_price_include,
-            'tour_price_exclude' =>  $request->tour_price_exclude,
-            'hotels' =>  $request->hotels,
-            'photo' => $filePath,
-        ]);
+        $result = Package::findOrFail($id);
+        if ($result == $id){
+            $result->update([
+                'package_name' => $request->package_name,
+                'continents_id' =>  $request->continents_id,
+                'sub_continents_id' =>  $request->sub_continents_id,
+                'trip_type_id' =>  $request->trip_type_id,
+                'tour_duration' =>  $request->tour_duration,
+                'tour_price' =>  $request->tour_price,
+                'tour_details' =>  $request->tour_details,
+                'tour_price_include' =>  $request->tour_price_include,
+                'tour_price_exclude' =>  $request->tour_price_exclude,
+                'hotels' =>  $request->hotels,
+                'photo' => $filePath,
+            ]);
+        }else{
+            session()->flash('error','did not find any id');
+            return redirect()->route('package.edit');
+        }
+
+
 
         // == sessions ==
         if ($result){
             $request->session()->flash('success','Package Updated Successfully');
-            return redirect()->route('backend.package.index');
+            return redirect()->route('package.edit');
         }else{
             $request->session()->flash('success','Package Create Fail');
-            return redirect()->route('backend.package.edit');
+            return redirect()->route(' package.edit');
         }
     }
 
@@ -197,10 +220,10 @@ class PackageController extends Controller
         // == sessions ==
         if ($result){
             session()->flash('success','Package Deleted Successfully');
-            return redirect()->route('backend.package.index');
+            return redirect()->route('package.index');
         }else{
-            session()->flash('success','Package Delete Fail');
-            return redirect()->route('backend.package.index');
+            session()->flash('error','Package Delete Fail');
+            return redirect()->route('package.index');
         }
     }
 }

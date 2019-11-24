@@ -50,6 +50,14 @@ Route::get('/trip-type/edit/{id}', 'backend\TripTypeController@edit')->name('tri
 Route::put('/trip-type/update/{id}', 'backend\TripTypeController@update')->name('trip_type.update');
 Route::delete('/trip-type/delete/{id}', 'backend\TripTypeController@destroy')->name('trip_type.delete');
 
+// ==Admin Package Route ==
+Route::get('/package/list', 'backend\PackageController@index')->name('package.index');
+Route::get('/package/add', 'backend\PackageController@create')->name('package.add');
+Route::post('/package/store', 'backend\PackageController@store')->name('package.store');
+Route::get('/package/edit/{id}', 'backend\PackageController@edit')->name('package.edit');
+Route::put('/package/update/{id}', 'backend\PackageController@update')->name('package.update');
+Route::delete('/package/delete/{id}', 'backend\PackageController@destroy')->name('package.delete');
+
 
 
 

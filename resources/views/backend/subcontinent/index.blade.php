@@ -66,20 +66,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($subContinents as $subCountry)
+                                @foreach($subContinents as $subContinent)
                                     <tr id="1" class="gradeX">
-                                        <td>{{ $subCountry->id }}</td>
-                                        <td><img class="img-thumbnail" src="{{ asset('$subCountry->photo') }}" alt="">
+                                        <td>{{ $subContinent->id }}</td>
+                                        <td><img class="img-thumbnail" src="{{ asset('$subContinent->photo') }}" alt="">
                                         </td>
-                                        <td>{{ $subCountry->continent->continent_name }}</td>
-                                        <td>{{ $subCountry->starting_price }}</td>
-                                        <td class="w-50">{{ $subCountry->description }}</td>
+                                        <td>{{ $subContinent->sub_continent_name }}</td>
+                                        <td>{{ $subContinent->continent->continent_name }}</td>
+                                        <td>{{ $subContinent->starting_price }}</td>
+                                        <td class="w-50">{{ $subContinent->description }}</td>
                                         <td>
-                                            <a type="button" href="{{ route('subcontinent.edit', $subCountry->id) }}"
+                                            <a type="button" href="{{ route('subcontinent.edit', $subContinent->id) }}"
                                                class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>
 
                                             </a>
-                                            <form action="{{ route('subcontinent.delete', $subCountry->id) }}"
+                                            <form action="{{ route('subcontinent.delete', $subContinent->id) }}"
                                                   method="post" onsubmit="return confirm('Are You Sure?')">
                                                 @csrf
                                                 @method('DELETE')
@@ -116,6 +117,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

@@ -33,7 +33,7 @@ class Continent extends Model
     protected $table = 'continent';
     protected $guarded = [];
 
-    public function subContinent(){
+    public function subcontinent(){
         return $this->hasMany('App\SubContinent');
     }
 }

@@ -258,8 +258,8 @@
                     <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="fas fa-box"></i><span class="hide-menu">Package </span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="package.html">Create</a></li>
-                            <li><a href="table-editable-table.html">List</a></li>
+                            <li><a href="{{ route('package.add') }}">Create</a></li>
+                            <li><a href="{{ route('package.index') }}">List</a></li>
                         </ul>
 
                     </li>

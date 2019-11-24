@@ -48,4 +48,17 @@ class Package extends Model
 {
     protected $table = 'packages';
     protected $guarded = [];
+
+    public function continent(){
+        return $this->belongsTo('App\Continent', 'continents_id')->withDefault();
+    }
+
+    public function subcontinent(){
+        return $this->belongsTo('App\SubContinent', 'sub_continents_id')->withDefault();
+    }
+
+    public function triptype(){
+        return $this->belongsTo('App\TripType', 'trip_type_id')->withDefault();
+    }
+
 }

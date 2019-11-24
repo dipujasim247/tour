@@ -63,7 +63,7 @@ class ContinentController extends Controller
 //            $this->uploadImg($photo, $folder, 'public', $name);
 //        }
 
-        $photoPath = $request->file('photo')->storeAs('/public/image_gallery/', $name);
+        $photoPath = $request->file('photo')->storeAs('/public/image_gallery', $name);
 
         // == store Continent ==
         $result = Continent::create([

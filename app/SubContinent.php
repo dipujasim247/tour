@@ -33,6 +33,6 @@ class SubContinent extends Model
     protected $guarded = [];
 
     public function continent(){
-        return $this->belongsTo('App\Continent')->withDefault();
+        return $this->belongsTo('App\Continent', 'continent_name')->withDefault();
     }
 }
