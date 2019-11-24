@@ -80,7 +80,7 @@
                             <!-- session section start-->
                             <!-- ============================================================== -->
 
-                            <form action="{{ route('continent.update', $continentEdit->id) }}" method="post"
+                            <form action="{{ route('continent.update', $continentEdit->id) }}"
                                   class="form-horizontal form-bordered" enctype="multipart/form-data">
 
                                 @csrf

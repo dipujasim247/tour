@@ -177,7 +177,7 @@ class PackageController extends Controller
 
         // == store data from package ==
         $result = Package::findOrFail($id);
-        if ($result == $id){
+        if ($result->id == $id){
             $result->update([
                 'package_name' => $request->package_name,
                 'continents_id' =>  $request->continents_id,
@@ -201,9 +201,9 @@ class PackageController extends Controller
         // == sessions ==
         if ($result){
             $request->session()->flash('success','Package Updated Successfully');
-            return redirect()->route('package.edit');
+            return redirect()->route('package.index');
         }else{
-            $request->session()->flash('success','Package Create Fail');
+            $request->session()->flash('error','Package Create Fail');
             return redirect()->route(' package.edit');
         }
     }
