@@ -6,10 +6,29 @@ use App\Continent;
 use App\Http\Controllers\Controller;
 use App\Package;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class FrontContinentController extends Controller
+class HomeController extends Controller
 {
+
+
+    public function getAllContinents(){
+        $continents = Continent::all();
+        $allPackages = Package::all();
+        return view('frontend.home.index')
+            ->with(compact('continents'))
+            ->with(compact('allPackages'));
+    }
+
+    public function getDestinations(){
+        $destinations = Continent::select('id', 'continent_name')->get();
+        return view('frontend.front_main', compact('destinations'));
+    }
+
+//    public function getAllPackages(){
+//        $allPackages = Package::all();
+//        return view('frontend.home.index')->with(compact('allPackages'));
+//    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +36,7 @@ class FrontContinentController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -27,7 +46,7 @@ class FrontContinentController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**

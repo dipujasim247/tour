@@ -11,12 +11,13 @@
 |
 */
 // == Home page ==
-Route::get('/', 'frontend\FrontContinentController@index')->name('front.index');
+//Route::get('/', 'frontend\FrontContinentController@index')->name('front.index');
 
 // == Package Page ==
-Route::get('/packages', 'frontend\FrontPackageController@index')->name('front.continent');
-Route::get('/packages/{id}', 'frontend\FrontPackageController@getPackagesFromContinent')->name('package.show_package');
-Route::get('/packages/details/{id}', 'frontend\FrontPackageController@getPackagesFromContinent')->name('package.show_package_details');
+Route::get('/', 'frontend\HomeController@getAllContinents');
+//Route::get('/front/dest', 'frontend\HomeController@getDestinations');
+//Route::get('/packages/{id}', 'frontend\FrontPackageController@getPackagesFromContinent')->name('package.show_package');
+//Route::get('/packages/details/{id}', 'frontend\FrontPackageController@getPackagesFromContinent')->name('package.show_package_details');
 //Route::get('/packages/store', 'frontend\FrontPackageController@store')->name('continent.store');
 
 Auth::routes();
