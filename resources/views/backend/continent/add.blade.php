@@ -54,6 +54,26 @@
                     <div class="card">
                         <div class="card-header bg-info">
                             <h4 class="m-b-0 text-white">Continent </h4>
+                            <!-- ============================================================== -->
+                            <!-- session section start-->
+                            <!-- ============================================================== -->
+                            @if(session()->has('success'))
+                                <div class="row">
+                                    <div class="col-12 alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                </div>
+                            @elseif(session()->has('error'))
+                                <div class="row">
+                                    <div class="col-12 alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                </div>
+                        @endif
+
+                        <!-- ============================================================== -->
+                            <!-- session section start-->
+                            <!-- ============================================================== -->
                         </div>
                         <div class="card-body">
                             <!-- ============================================================== -->
@@ -67,26 +87,6 @@
                                 @method('POST')
 
                                 <div class="form-body">
-                                    <!-- ============================================================== -->
-                                    <!-- session section start-->
-                                    <!-- ============================================================== -->
-                                    @if(session()->has('success'))
-                                        <div class="row">
-                                            <div class="col-12 alert alert-success">
-                                                {{ session('success') }}
-                                            </div>
-                                        </div>
-                                    @elseif(session()->has('error'))
-                                        <div class="row">
-                                            <div class="col-12 alert alert-danger">
-                                                {{ session('error') }}
-                                            </div>
-                                        </div>
-                                @endif
-
-                                <!-- ============================================================== -->
-                                    <!-- session section start-->
-                                    <!-- ============================================================== -->
 
                                     <!-- ============================= Continent Name ================================= -->
                                     <div class="form-group row">
@@ -99,7 +99,7 @@
 
                                     <!-- ============================= Starting price ================================= -->
                                     <div class="form-group row">
-                                        <label for="example-email">Starting price </label>
+                                        <label for="">Starting price </label>
                                         <input type="text" id="" name="starting_price"
                                                value="{{ old('starting_price') }}" class="form-control"
                                                placeholder="Starting price">

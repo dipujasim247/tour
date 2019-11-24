@@ -25,7 +25,7 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Create</h3>
+                    <h3 class="text-themecolor">Update</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -47,6 +47,26 @@
             <!-- Start Page Content -->
             <!-- ============================================================== -->
             <!-- Row -->
+            <!-- ============================================================== -->
+            <!-- session section start-->
+            <!-- ============================================================== -->
+            @if(session()->has('success'))
+                <div class="row">
+                    <div class="col-12 alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @elseif(session()->has('error'))
+                <div class="row">
+                    <div class="col-12 alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                </div>
+        @endif
+
+        <!-- ============================================================== -->
+            <!-- session section start-->
+            <!-- ============================================================== -->
 
             <!-- Row -->
             <div class="row">
@@ -59,28 +79,8 @@
                             <!-- ============================================================== -->
                             <!-- Start Content Form-->
                             <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- session section start-->
-                            <!-- ============================================================== -->
-                            @if(session()->has('success'))
-                                <div class="row">
-                                    <div class="col-12 alert alert-success">
-                                        {{ session('success') }}
-                                    </div>
-                                </div>
-                            @elseif(session()->has('error'))
-                                <div class="row">
-                                    <div class="col-12 alert alert-danger">
-                                        {{ session('error') }}
-                                    </div>
-                                </div>
-                        @endif
 
-                        <!-- ============================================================== -->
-                            <!-- session section start-->
-                            <!-- ============================================================== -->
-
-                            <form action="{{ route('subcontinent.update', $subContinenEdit->id) }}" method="post"
+                            <form action="{{ route('subcontinent.update', $subContinentEdit->id) }}" method="post"
                                   class="form-horizontal form-bordered" enctype="multipart/form-data">
 
                                 @csrf
@@ -90,17 +90,17 @@
                                     <!-- ============================= Continent Name ================================= -->
                                     <div class="form-group row">
                                         <label for="name">Sub Continent Name </label>
-                                        <input type="text" id="" name="continent_name"
-                                               value="{{ $subContinenEdit->sub_continent_name }}" class="form-control"
+                                        <input type="text" id="" name="sub_continent_name"
+                                               value="{{ $subContinentEdit->sub_continent_name }}" class="form-control"
                                                placeholder="Sub Continent Name">
                                         <span class="text text-danger">{{ $errors->first('sub_continent_name') }}</span>
                                     </div>
 
                                     <!-- ============================= Continent name select ================================= -->
                                     <div class="form-group row">
-                                        <select class="select2 form-control custom-select"
+                                        <select class="select2 form-control custom-select" name="continent_name"
                                                 style="width: 100%; height:36px;">
-                                            <option>Sub-Continent Country</option>
+                                            <option>Continent Country</option>
                                             @foreach($continents as $continent)
 
                                                 <option
@@ -113,7 +113,7 @@
                                     <div class="form-group row">
                                         <label>Description</label>
                                         <textarea class="form-control" rows="5"
-                                                  name="description">{{ $continentEdit->description }}</textarea>
+                                                  name="description">{{ $subContinentEdit->description }}</textarea>
                                         <span class="text text-danger">{{ $errors->first('description') }}</span>
                                     </div>
 
@@ -125,9 +125,10 @@
                                                     <div class="card-body">
                                                         <h4 class="card-title">Image Upload</h4>
                                                         <label for="input-file-now-custom-1">Change Your
-                                                            Image {{ $continentEdit->photo }}</label>
+                                                            Image</label>
                                                         <input type="file" name="photo" id="input-file-now-custom-1"
                                                                class="dropify"/>
+                                                        <span>{{ $subContinentEdit->photo }}</span>
                                                     </div>
                                                 </div>
                                             </div>

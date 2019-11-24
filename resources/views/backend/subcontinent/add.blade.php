@@ -74,7 +74,7 @@
                         <!-- ============================================================== -->
                             <!-- session section start-->
                             <!-- ============================================================== -->
-
+                            z
                         </div>
                         <div class="card-body">
                             <!-- ============================================================== -->
@@ -101,16 +101,18 @@
                                     <!-- ============================= Continent name select ================================= -->
                                     <div class="form-group row">
                                         <label for="name">Select Continent Name </label>
-                                        <select class="select2 form-control custom-select"
+                                        <select class="select2 form-control custom-select" name="continent_name"
                                                 style="width: 100%; height:36px;">
                                             <option>Continent Name</option>
                                             @foreach($continents as $continent)
 
-                                                <option
-                                                    value="{{ $continent->id }}">{{ $continent->continent_name }}</option>
+                                                <option value="{{ $continent->id }}">
+                                                    {{ $continent->continent_name }}
+                                                </option>
 
                                             @endforeach
                                         </select>
+                                        <span class="text text-danger">{{ $errors->first('continent_name') }}</span>
                                     </div>
                                     <!-- ========================== Description ==================================== -->
                                     <div class="form-group row">

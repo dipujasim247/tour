@@ -6,6 +6,7 @@ use App\Continent;
 use App\Http\Controllers\Controller;
 use App\SubContinent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SubContinentController extends Controller
 {
@@ -49,16 +50,14 @@ class SubContinentController extends Controller
         $data = $request->validate([
             'sub_continent_name' => 'required',
             'continent_name' => 'required',
-            'description' => 'nullable',
+            'description' => 'required',
             'photo' => 'required',
         ]);
-
-        dd($data);
 
         // == take photo name and extention ==
 //        if ($request->hasFile('photo')) {
 //            $photo = $request->file('photo');
-            $name = Str::slug($request->input('first_name')) . '_' . time();
+            $name = Str::slug($request->input('sub_continent_name')) . '_' . time();
 //            $folder = "/images/";
 //            $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
 //            $this->uploadImg($photo, $folder, 'public', $name);
@@ -78,7 +77,7 @@ class SubContinentController extends Controller
             $request->session()->flash('success','Sub Continent Created Successfully');
             return redirect()->route('subcontinent.add');
         }else{
-            $request->session()->flash('success','Sub Continent Create Fail');
+            $request->session()->flash('error','Sub Continent Create Fail');
             return redirect()->route('subcontinent.add');
         }
     }
@@ -104,8 +103,9 @@ class SubContinentController extends Controller
     public function edit($id)
     {
         // == Edit SubContinent ==
-        $subContinenEdit = SubContinent::findOrFail($id);
-        return view('backend.subcontinent.edit')->with(compact('subContinenEdit'));
+        $continents = Continent::select('id', 'continent_name')->get();
+        $subContinentEdit = SubContinent::findOrFail($id);
+        return view('backend.subcontinent.edit')->with(compact('subContinentEdit', 'continents'));
     }
 
     /**
@@ -122,18 +122,18 @@ class SubContinentController extends Controller
             'sub_continent_name' => 'required',
             'continent_name' => 'required',
             'description' => 'nullable',
-            'photo' => 'required|images|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'required',
         ]);
 
 //        if ($request->hasFile('photo')) {
 //            $photo = $request->file('photo');
-            $name = Str::slug($request->input('first_name')) . '_' . time();
+            $name = Str::slug($request->input('sub_continent_name')) . '_' . time();
 //            $folder = "/images/";
 //            $filePath = $folder . $name . '.' . $photo->getClientOriginalExtension();
 //            $this->uploadImg($photo, $folder, 'public', $name);
 //        }
 
-        $photoPath = $request->file('photo')->storeAs('/public/image_gallery/', $name);
+        $photoPath = $request->file('photo')->storeAs('public/image_gallery', $name);
         // == Update Continent ==
         $result = SubContinent::findOrFail($id)->update([
             'sub_continent_name' => $request->sub_continent_name,
@@ -144,7 +144,7 @@ class SubContinentController extends Controller
 
         if ($result){
             $request->session()->flash('success','Sub Continent Updated Successfully');
-            return redirect()->route('subcontinent.index');
+            return redirect()->route('subcontinent.edit');
         }else{
             $request->session()->flash('success','Sub Continent Create Fail');
             return redirect()->route('subcontinent.edit');
